@@ -67,8 +67,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch<TasksAct
     todolistsAPI.getTasks(todolistId)
         .then((res) => {
             const tasks = res.data.items
-            const action = setTasksAC(tasks, todolistId)
-            dispatch(action)
+            dispatch(setTasksAC(tasks, todolistId))
             dispatch(setStatusAC('succeeded'))
         })
 }
@@ -76,8 +75,7 @@ export const removeTaskTC = (taskId: string, todolistId: string) => (dispatch: D
     dispatch(setStatusAC('loading'))
     todolistsAPI.deleteTask(todolistId, taskId)
         .then(res => {
-            const action = removeTaskAC(taskId, todolistId)
-            dispatch(action)
+            dispatch(removeTaskAC(taskId, todolistId))
             dispatch(setStatusAC('succeeded'))
         })
 }

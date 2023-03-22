@@ -58,7 +58,6 @@ export const setTodolistsAC = (todolists: Array<TodolistType>) => ({type: 'SET-T
 
 export const fetchTodolistsTC = () => async (dispatch: Dispatch<TodolistsActionsType>) => {
     dispatch(setStatusAC('loading'))
-    // dispatch(setErrorAC('ERROR'))
     try{
         const res = await todolistsAPI.getTodolists()
         dispatch(setTodolistsAC(res.data))
