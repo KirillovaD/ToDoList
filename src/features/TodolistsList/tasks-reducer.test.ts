@@ -78,7 +78,7 @@ test('status of specified task should be changed', () => {
     const action = tasksThunks.updateTask.fulfilled(
         args,
         'requestId',
-        args);;
+        args);
 
     const endState = tasksReducer(startState, action)
 
