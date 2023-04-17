@@ -1,10 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {ComponentStory, ComponentMeta} from '@storybook/react';
-
 import {action} from "@storybook/addon-actions";
-
-import {EditableSpan} from "../components/EditableSpan/EditableSpan";
 import {TextField} from "@mui/material";
+import {EditableSpan} from "common/components";
 
 export default {
     title: 'TODOLISTS/EditableSpan',

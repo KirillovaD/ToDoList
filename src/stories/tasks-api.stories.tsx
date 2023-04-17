@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react'
-import axios from "axios";
-import {todolistsAPI} from "../api/todolists-api";
+import React, {useState} from 'react'
+import {todolistsAPI} from "features/TodolistsList/todolists.api";
 
 
 export default {
@@ -29,7 +28,7 @@ export const CreateTask = () => {
     const [title, setTitle] = useState<string>('')
 
     const addTask = ()=>{
-        todolistsAPI.createTask(todolistId, title)
+        todolistsAPI.createTask({todolistId, title})
             .then(res => setState(res.data))
     }
 

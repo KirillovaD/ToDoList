@@ -1,8 +1,10 @@
 import { Dispatch } from 'redux'
-import { authAPI } from 'api/todolists-api'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {AppThunk} from "app/store";
 import {authActions} from "features/auth/auth-reducer";
+import {authAPI} from "features/auth/auth.api";
+import {ResultCode} from "common/enums";
+
 
 
 const initialState = {
@@ -37,7 +39,7 @@ export const appActions = slice.actions
 
 export const initializeAppTC = ():AppThunk => (dispatch: Dispatch) => {
     authAPI.me().then(res => {
-        if (res.data.resultCode === 0) {
+        if (res.data.resultCode === ResultCode.Success) {
             dispatch(authActions.setIsLoggedIn({isLoggedIn: true}));
         } else {
 
