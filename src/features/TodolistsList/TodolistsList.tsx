@@ -8,7 +8,7 @@ import {
     removeTodolistTC,
     todolistsActions
 } from './todolists-reducer'
-import {removeTaskTC, tasksThunks} from './tasks-reducer'
+import {tasksThunks} from './tasks-reducer'
 import { Grid, Paper } from '@mui/material'
 import { Todolist } from './Todolist/Todolist'
 import { Navigate } from 'react-router-dom'
@@ -37,8 +37,8 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         dispatch(fetchTodolistsTC())
     }, [])
 
-    const removeTask = useCallback(function (id: string, todolistId: string) {
-        dispatch(removeTaskTC(id, todolistId))
+    const removeTask = useCallback(function (taskId: string, todolistId: string) {
+        dispatch(tasksThunks.removeTask({taskId, todolistId}))
     }, [])
 
     const addTask = useCallback(function (title: string, todolistId: string) {
