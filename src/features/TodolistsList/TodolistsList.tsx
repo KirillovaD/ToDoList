@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import {
-    changeTodolistTitleTC,
     FilterValuesType,
     todolistsActions, todolistsThunks
 } from './todolists-reducer'
@@ -59,7 +58,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     }, [])
 
     const changeTodolistTitle = useCallback(function (id: string, title: string) {
-        dispatch(changeTodolistTitleTC(id, title))
+        dispatch(todolistsThunks.changeTodoTitle({id, title}))
     }, [])
 
     const addTodolist = useCallback((title: string) => {
