@@ -152,16 +152,15 @@ const slice = createSlice({
                 if (index !== -1) tasks.splice(index, 1)
             })
 
+            .addCase(todolistsActions.addTodolist, (state, action) => {
+                state[action.payload.todolist.id] = []
+            })
             .addCase(todolistsThunks.fetchTodos.fulfilled, (state, action) => {
                 action.payload.todolists.forEach((tl) => {
                     state[tl.id] = []
                 })
             })
-
-            .addCase(todolistsActions.addTodolist, (state, action) => {
-                state[action.payload.todolist.id] = []
-            })
-            .addCase(todolistsActions.removeTodolist, (state, action) => {
+            .addCase(todolistsThunks.removeTodo.fulfilled, (state, action) => {
                 delete state[action.payload.id]
             })
 

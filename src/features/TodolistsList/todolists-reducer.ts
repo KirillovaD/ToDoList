@@ -5,7 +5,8 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {handleServerNetworkError} from "common/utils/handle-server-network-error";
 import {clearTasksAndTodolists} from "common/actions";
 import {todolistsAPI, TodolistType} from "features/TodolistsList/todolists.api";
-import {createAppAsyncThunk} from "common/utils";
+import {createAppAsyncThunk, handleServerAppError} from "common/utils";
+import {ResultCode} from "common/enums";
 
 
 const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
@@ -24,16 +25,23 @@ const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
         }
 
     })
-const removeTodo = createAppAsyncThunk<{ id: string }, { id: string }>
+const removeTodo = createAppAsyncThunk<{ id: string }, string>
 ('todo/removeTodo',
-    async ({id}, thunkAPI) => {
+    async (id, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
         try {
             dispatch(appActions.setAppStatus({status: 'loading'}))
             dispatch(todolistsActions.changeTodolistEntityStatus({id, status: 'loading'}))
             const res = await todolistsAPI.deleteTodolist(id)
-            dispatch(appActions.setAppStatus({status: 'succeeded'}))
-            return {id}
+            if (res.data.resultCode===ResultCode.Success){
+                dispatch(appActions.setAppStatus({status: 'succeeded'}))
+                return {id}
+            }
+            else {
+                handleServerAppError(res.data, dispatch);
+                return rejectWithValue(null)
+            }
+
 
         } catch (err) {
             handleServerNetworkError(err, dispatch);
@@ -72,7 +80,7 @@ const slice = createSlice({
                 return action.payload.todolists.map(tl => ({...tl, filter: 'all', entityStatus: 'idle'}))
             })
             .addCase(removeTodo.fulfilled,(state,action)=>{
-                const index = state.findIndex(tl => tl.id === action.payload.id)
+                const index = state.findIndex(todo => todo.id === action.payload.id)
                 if (index !== -1) state.splice(index, 1)
             })
 
