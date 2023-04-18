@@ -122,7 +122,7 @@ const slice = createSlice({
                 if (todo) todo.title = action.payload.title
             })
 
-            .addCase(clearTasksAndTodolists, (state, action) => {
+            .addCase(clearTasksAndTodolists, () => {
                 return []
             })
 
