@@ -1,8 +1,6 @@
-import {Dispatch} from 'redux'
-import {AppThunk} from 'app/store'
 import {appActions} from 'app/app-reducer';
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {todolistsActions, todolistsThunks} from "./todolists-reducer";
+import {todolistsThunks} from "./todolists-reducer";
 import {clearTasksAndTodolists, ClearTasksAndTodolistsType} from "common/actions/common.actions";
 import {createAppAsyncThunk} from "common/utils/create-app-async-thunk";
 import {handleServerAppError, handleServerNetworkError} from "common/utils";

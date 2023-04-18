@@ -124,7 +124,7 @@ export const todolistsThunks = {fetchTodos,removeTodo,addTodo}
 export const changeTodolistTitleTC = (id: string, title: string): AppThunk => {
     return (dispatch: Dispatch) => {
         todolistsAPI.updateTodolist(id, title)
-            .then((res) => {
+            .then(() => {
                 dispatch(todolistsActions.changeTodolistTitle({id: id, title}))
             })
     }
