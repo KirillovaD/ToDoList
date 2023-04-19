@@ -1,7 +1,7 @@
 import {appActions} from 'app/app-reducer';
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {todolistsThunks} from "./todolists-reducer";
-import {clearTasksAndTodolists, ClearTasksAndTodolistsType} from "common/actions/common.actions";
+import {clearTasksAndTodolists} from "common/actions/common.actions";
 import {createAppAsyncThunk} from "common/utils/create-app-async-thunk";
 import {handleServerAppError, handleServerNetworkError} from "common/utils";
 import {
@@ -48,6 +48,7 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, AddTaskArgType>
         return rejectWithValue(null)
     }
 })
+
 const updateTask = createAppAsyncThunk<UpdateTaskArgType, UpdateTaskArgType>
 ('tasks/updateTask', async (arg, thunkAPI) => {
     const {dispatch, rejectWithValue, getState} = thunkAPI
@@ -83,7 +84,6 @@ const updateTask = createAppAsyncThunk<UpdateTaskArgType, UpdateTaskArgType>
     }
 })
 
-
 const removeTask = createAppAsyncThunk<DeleteTaskArgType, DeleteTaskArgType>
 ('tasks/removeTask', async (arg, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
@@ -104,6 +104,7 @@ const removeTask = createAppAsyncThunk<DeleteTaskArgType, DeleteTaskArgType>
     }
 
 })
+
 
 const initialState: TasksStateType = {}
 
@@ -163,14 +164,12 @@ const slice = createSlice({
                 delete state[action.payload.id]
             })
 
-
-            .addCase(clearTasksAndTodolists.type, (state, action: PayloadAction<ClearTasksAndTodolistsType>) => {
-                return action.payload.tasks
+            .addCase(clearTasksAndTodolists, () => {
+                return {}
             })
     }
 })
 export const tasksReducer = slice.reducer
-export const tasksActions = slice.actions
 export const tasksThunks = {fetchTasks, addTask, updateTask, removeTask}
 
 

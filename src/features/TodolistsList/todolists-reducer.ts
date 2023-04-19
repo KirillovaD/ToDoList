@@ -134,11 +134,7 @@ export const todolistsReducer = slice.reducer
 export const todolistsActions = slice.actions
 export const todolistsThunks = {fetchTodos, removeTodo, addTodo, changeTodoTitle}
 
-// thunks
-
-
 // types
-
 export type FilterValuesType = 'all' | 'active' | 'completed';
 export type TodolistDomainType = TodolistType & {
     filter: FilterValuesType

@@ -1,11 +1,4 @@
-import { Dispatch } from 'redux'
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {AppThunk} from "app/store";
-import {authActions} from "features/auth/auth-reducer";
-import {authAPI} from "features/auth/auth.api";
-import {ResultCode} from "common/enums";
-
-
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 const initialState = {
     status: 'idle' as RequestStatusType,
@@ -27,7 +20,7 @@ const slice = createSlice({
         setAppStatus: (state, action: PayloadAction<{ status: RequestStatusType }>) => {
             state.status = action.payload.status
         },
-        setAppInitialized: (state, action: PayloadAction<{isInitialized: boolean}>) => {
+        setAppInitialized: (state, action: PayloadAction<{ isInitialized: boolean }>) => {
             state.isInitialized = action.payload.isInitialized
         },
     },
@@ -37,14 +30,5 @@ export const appReducer = slice.reducer
 export const appActions = slice.actions
 
 
-export const initializeAppTC = ():AppThunk => (dispatch: Dispatch) => {
-    authAPI.me().then(res => {
-        if (res.data.resultCode === ResultCode.Success) {
-            dispatch(authActions.setIsLoggedIn({isLoggedIn: true}));
-        } else {
 
-        }
 
-        dispatch(appActions.setAppInitialized({isInitialized: true}));
-    })
-}

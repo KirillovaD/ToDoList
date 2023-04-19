@@ -1,13 +1,6 @@
-import {createAction, nanoid} from "@reduxjs/toolkit";
-import {TasksStateType} from "features/TodolistsList/tasks-reducer";
-import {TodolistDomainType} from "features/TodolistsList/todolists-reducer";
+import {createAction} from "@reduxjs/toolkit";
 
-export type ClearTasksAndTodolistsType = {
-    tasks: TasksStateType,
-    todolists: TodolistDomainType[]
-}
-
-export const clearTasksAndTodolists = createAction<ClearTasksAndTodolistsType>('common/clear-tasks-todolists')
+export const clearTasksAndTodolists = createAction('common/clear-tasks-todolists')
 
 
 //с доп параметрами

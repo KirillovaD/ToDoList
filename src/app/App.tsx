@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect } from 'react'
+import React, {useCallback, useEffect} from 'react'
 import './App.css'
-import { TodolistsList } from 'features/TodolistsList/TodolistsList'
-import { useSelector } from 'react-redux'
-import { initializeAppTC } from './app-reducer'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { Login } from 'features/auth/Login'
+import {TodolistsList} from 'features/TodolistsList/TodolistsList'
+import {useSelector} from 'react-redux'
+import {BrowserRouter, Route, Routes} from 'react-router-dom'
+import {Login} from 'features/auth/Login'
 
 import {
     AppBar,
@@ -16,12 +15,12 @@ import {
     Toolbar,
     Typography
 } from '@mui/material';
-import { Menu } from '@mui/icons-material'
+import {Menu} from '@mui/icons-material'
 import {selectIsLoggedIn} from "features/auth/auth.selectors";
 import {selectInitialized, selectStatus} from "app/app-selector";
-import {logoutTC} from "features/auth/auth-reducer";
 import {ErrorSnackbar} from "common/components";
 import {useAppDispatch} from "common/hooks";
+import {authThunks} from "features/auth/auth-reducer";
 
 type PropsType = {
     demo?: boolean
@@ -34,11 +33,11 @@ function App({demo = false}: PropsType) {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(initializeAppTC())
+        dispatch(authThunks.initializeApp())
     }, [])
 
     const logoutHandler = useCallback(() => {
-        dispatch(logoutTC())
+        dispatch(authThunks.logout())
     }, [])
 
     if (!isInitialized) {
