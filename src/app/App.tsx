@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import './App.css'
 import {TodolistsList} from 'features/TodolistsList/TodolistsList'
 import {useSelector} from 'react-redux'
@@ -19,7 +19,7 @@ import {Menu} from '@mui/icons-material'
 import {selectIsLoggedIn} from "features/Auth/auth.selectors";
 import {selectInitialized, selectStatus} from "app/app-selector";
 import {ErrorSnackbar} from "common/components";
-import {useActions, useAppDispatch} from "common/hooks";
+import {useActions} from "common/hooks";
 import {authThunks} from "features/Auth/auth-reducer";
 
 type PropsType = {
