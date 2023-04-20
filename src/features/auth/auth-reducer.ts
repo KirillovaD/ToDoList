@@ -18,8 +18,9 @@ const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
                 dispatch(appActions.setAppStatus({status: 'succeeded'}))
                 return {isLoggedIn: true}
             } else {
-                handleServerAppError(res.data, dispatch)
-                return rejectWithValue(null)
+                // handleServerAppError(res.data, dispatch)
+                dispatch(appActions.setAppStatus({status: 'failed'}))
+                return rejectWithValue(res.data)
             }
         } catch
             (err) {
@@ -58,7 +59,6 @@ const initializeApp = createAppAsyncThunk<{ isLoggedIn: boolean }, void>
         if (res.data.resultCode === ResultCode.Success) {
             return {isLoggedIn: true};
         } else {
-            handleServerAppError(res.data, dispatch);
             return rejectWithValue(null);
         }
     } catch
