@@ -5,8 +5,8 @@ import {Navigate} from 'react-router-dom'
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from '@mui/material'
 import {selectIsLoggedIn} from "./auth.selectors";
 import {useAppDispatch} from "common/hooks";
-import {authThunks} from "features/auth/auth-reducer";
-import {LoginParamsType} from "features/auth/auth.api";
+import {authThunks} from "features/Auth/auth-reducer";
+import {LoginParamsType} from "features/Auth/auth.api";
 import {ResponseType} from "common/types";
 
 import '../../index.css';
@@ -46,7 +46,6 @@ export const Login = () => {
                         fieldsErrors.forEach((f)=>formikHelpers.setFieldError(f.field,f.error))
                     }
                 });
-            formik.resetForm()
         },
     })
 

@@ -3,9 +3,11 @@ import axios, {AxiosError} from "axios";
 import {appActions} from "app/app-reducer";
 
 /**
- * Error handler function with network errors, uses when in catch case
- * @param e
- * @param dispatch function for sending message to Redux store
+ * Handles network errors that may occur when sending requests to the server using the Axios library.
+ *
+ * @param {unknown} e - An error object that can be of any data type.
+ * @param {Dispatch} dispatch - A function for dispatching an action to the Redux Store.
+ * @returns {void}
  */
 export const handleServerNetworkError = (e: unknown, dispatch: Dispatch) => {
     const err = e as Error | AxiosError<{ error: string }>
