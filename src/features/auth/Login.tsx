@@ -19,17 +19,18 @@ export const Login = () => {
 
     const formik = useFormik({
         validate: (values) => {
-            //     if (!values.email) {
-            //         return {
-            //             email: 'Email is required'
-            //         }
-            //     }
-            //     if (!values.password) {
-            //         return {
-            //             password: 'Password is required'
-            //         }
-            //     }
-            //
+            const errors: FormikErrorType = {}
+            if (!values.email) {
+                errors.email = 'Required'
+            } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+                errors.email = 'Invalid email address'
+            }
+            if (!values.password) {
+                errors.password = 'Required'
+            } else if (values.password.length > 10) {
+                errors.password = 'Password should be max 7 symbols'
+            }
+            return errors
         },
         initialValues: {
             email: '',
@@ -40,8 +41,12 @@ export const Login = () => {
             dispatch(authThunks.login(values))
                 .unwrap()
                 .catch((reason: ResponseType) => {
-                    reason.fieldsErrors.forEach((f)=>formikHelpers.setFieldError(f.field,f.error))
+                    const {fieldsErrors} = reason
+                    if (fieldsErrors){
+                        fieldsErrors.forEach((f)=>formikHelpers.setFieldError(f.field,f.error))
+                    }
                 });
+            formik.resetForm()
         },
     })
 
@@ -74,14 +79,14 @@ export const Login = () => {
                             margin="normal"
                             {...formik.getFieldProps("email")}
                         />
-                        {formik.errors.email ? <div className='error'>{formik.errors.email}</div> : null}
+                        {formik.touched.email && formik.errors.email && <div className='error'>{formik.errors.email}</div>}
                         <TextField
                             type="password"
                             label="Password"
                             margin="normal"
                             {...formik.getFieldProps("password")}
                         />
-                        {formik.errors.password ? <div className='error'>{formik.errors.password}</div> : null}
+                        {formik.touched.password && formik.errors.password && <div className='error'>{formik.errors.password}</div>}
                         <FormControlLabel
                             label={'Remember me'}
                             control={<Checkbox
@@ -89,10 +94,18 @@ export const Login = () => {
                                 checked={formik.values.rememberMe}
                             />}
                         />
-                        <Button type={'submit'} variant={'contained'} color={'primary'}>Login</Button>
+                        <Button type={'submit'} variant={'contained'} color={'primary'} disabled={!!formik.errors.email || !!formik.errors.password}>Login</Button>
                     </FormGroup>
                 </FormControl>
             </form>
         </Grid>
     </Grid>
+}
+
+
+//types
+type FormikErrorType = {
+    email?: string
+    password?: string
+    rememberMe?: boolean
 }

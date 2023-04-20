@@ -5,88 +5,65 @@ import {clearTasksAndTodolists} from "common/actions";
 import {todolistsAPI, TodolistType, UpdateTodolistTitleArgType} from "features/TodolistsList/todolists.api";
 import {createAppAsyncThunk, handleServerAppError} from "common/utils";
 import {ResultCode} from "common/enums";
+import {thunkTryCatch} from "common/utils/thunk-try-catch";
 
 
 const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
 ('todo/fetchTodos',
     async (_, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        try {
-            dispatch(appActions.setAppStatus({status: 'loading'}))
+        return thunkTryCatch(thunkAPI, async () => {
             const res = await todolistsAPI.getTodolists()
-            dispatch(appActions.setAppStatus({status: 'succeeded'}))
             return {todolists: res.data}
-
-        } catch (err) {
-            handleServerNetworkError(err, dispatch);
-            return rejectWithValue(null)
-        }
-
+        })
     })
+
 const addTodo = createAppAsyncThunk<{ todolist: TodolistType }, string>
 ('todo/addTodo',
     async (title, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        try {
-            dispatch(appActions.setAppStatus({status: 'loading'}))
+        return thunkTryCatch(thunkAPI, async () => {
             const res = await todolistsAPI.createTodolist(title)
             if (res.data.resultCode === ResultCode.Success) {
-                dispatch(appActions.setAppStatus({status: 'succeeded'}))
                 return {todolist: res.data.data.item}
             } else {
                 handleServerAppError(res.data, dispatch);
                 return rejectWithValue(null)
             }
-
-        } catch (err) {
-            handleServerNetworkError(err, dispatch);
-            return rejectWithValue(null)
-        }
+        })
     })
+
 
 const removeTodo = createAppAsyncThunk<{ id: string }, string>
 ('todo/removeTodo',
     async (id, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        try {
-            dispatch(appActions.setAppStatus({status: 'loading'}))
+        return thunkTryCatch(thunkAPI, async () => {
             dispatch(todolistsActions.changeTodolistEntityStatus({id, status: 'loading'}))
             const res = await todolistsAPI.deleteTodolist(id)
             if (res.data.resultCode === ResultCode.Success) {
-                dispatch(appActions.setAppStatus({status: 'succeeded'}))
                 return {id}
             } else {
                 handleServerAppError(res.data, dispatch);
                 return rejectWithValue(null)
             }
 
-
-        } catch (err) {
-            handleServerNetworkError(err, dispatch);
-            return rejectWithValue(null)
-        }
-
+        })
     })
 
 const changeTodoTitle = createAppAsyncThunk<UpdateTodolistTitleArgType, UpdateTodolistTitleArgType>
 ('todo/changeTodoTitle',
     async (arg, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        try {
-            dispatch(appActions.setAppStatus({status: 'loading'}))
+        return thunkTryCatch(thunkAPI, async () => {
             const res = await todolistsAPI.updateTodolist(arg)
             if (res.data.resultCode === ResultCode.Success) {
-                dispatch(appActions.setAppStatus({status: 'succeeded'}))
                 return arg
             } else {
                 handleServerAppError(res.data, dispatch);
                 return rejectWithValue(null)
             }
-
-        } catch (err) {
-            handleServerNetworkError(err, dispatch);
-            return rejectWithValue(null)
-        }
+        })
 
     })
 
