@@ -10,7 +10,6 @@ import {thunkTryCatch} from "common/utils/thunk-try-catch";
 const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
 ('todo/fetchTodos',
     async (_, thunkAPI) => {
-        const {dispatch, rejectWithValue} = thunkAPI
         return thunkTryCatch(thunkAPI, async () => {
             const res = await todolistsAPI.getTodolists()
             return {todolists: res.data}

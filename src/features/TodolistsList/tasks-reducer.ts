@@ -3,9 +3,10 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {todolistsThunks} from "./todolists-reducer";
 import {clearTasksAndTodolists} from "common/actions/common.actions";
 import {createAppAsyncThunk} from "common/utils/create-app-async-thunk";
-import {handleServerAppError, handleServerNetworkError} from "common/utils";
+import {handleServerAppError} from "common/utils";
 import {
-    AddTaskArgType, DeleteTaskArgType,
+    AddTaskArgType,
+    DeleteTaskArgType,
     TaskType,
     todolistsAPI,
     UpdateTaskArgType,
