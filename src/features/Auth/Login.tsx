@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import {Navigate} from 'react-router-dom'
 import {Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, Grid, TextField} from '@mui/material'
 import {selectIsLoggedIn} from "./auth.selectors";
-import {useAppDispatch} from "common/hooks";
+import {useActions, useAppDispatch} from "common/hooks";
 import {authThunks} from "features/Auth/auth-reducer";
 import {LoginParamsType} from "features/Auth/auth.api";
 import {ResponseType} from "common/types";
@@ -13,13 +13,13 @@ import '../../index.css';
 
 
 export const Login = () => {
-    const dispatch = useAppDispatch()
+    const {login} = useActions(authThunks)
 
     const isLoggedIn = useSelector(selectIsLoggedIn);
 
     const formik = useFormik({
         validate: (values) => {
-            const errors: FormikErrorType = {}
+            const errors: Partial<LoginParamsType> = {}
             if (!values.email) {
                 errors.email = 'Required'
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
@@ -38,7 +38,7 @@ export const Login = () => {
             rememberMe: false
         },
         onSubmit: (values, formikHelpers: FormikHelpers<LoginParamsType>) => {
-            dispatch(authThunks.login(values))
+           login(values)
                 .unwrap()
                 .catch((reason: ResponseType) => {
                     const {fieldsErrors} = reason

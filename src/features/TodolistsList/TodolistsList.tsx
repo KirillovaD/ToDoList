@@ -22,7 +22,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const {fetchTodos,removeTodo:removeTodolistThunk,addTodo:addTodolistThunk, changeTodoTitle:changeTodolistTitleThunk }= useActions(todolistsThunks)
-    const {removeTask:removeTaskThunk, addTask:addTaskThunh, updateTask}= useActions(tasksThunks)
+    const {removeTask:removeTaskThunk, addTask:addTaskThunk, updateTask}= useActions(tasksThunks)
     const {changeTodolistFilter}= useActions(todolistsActions)
 
 
@@ -30,7 +30,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         if (demo || !isLoggedIn) {
             return;
         }
-        fetchTodos()
+        fetchTodos({})
     }, [])
 
     const removeTask = useCallback(function (taskId: string, todolistId: string) {
@@ -38,7 +38,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     }, [])
 
     const addTask = useCallback(function (title: string, todolistId: string) {
-        addTaskThunh({title, todolistId})
+        addTaskThunk({title, todolistId})
     }, [])
 
     const changeStatus = useCallback(function (taskId: string, status: TaskStatuses, todolistId: string) {
