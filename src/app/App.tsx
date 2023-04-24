@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react'
-import './App.css'
+import 'app/App.css'
 import {TodolistsList} from 'features/TodolistsList/TodolistsList'
 import {useSelector} from 'react-redux'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {Login} from 'features/Auth/Login'
+
 
 import {
     AppBar,
@@ -21,6 +22,8 @@ import {selectInitialized, selectStatus} from "app/app-selector";
 import {ErrorSnackbar} from "common/components";
 import {useActions} from "common/hooks";
 import {authThunks} from "features/Auth/auth-reducer";
+import {Header} from "common/components/Header/Header";
+import {Routing} from "common/components/Routing/Routing";
 
 type PropsType = {
     demo?: boolean
@@ -50,24 +53,8 @@ function App({demo = false}: PropsType) {
         <BrowserRouter>
             <div className="App">
                 <ErrorSnackbar/>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="menu">
-                            <Menu/>
-                        </IconButton>
-                        <Typography variant="h6">
-                            News
-                        </Typography>
-                        {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
-                    </Toolbar>
-                    {status === 'loading' && <LinearProgress/>}
-                </AppBar>
-                <Container fixed>
-                    <Routes>
-                        <Route path={'/'} element={<TodolistsList demo={demo}/>}/>
-                        <Route path={'/login'} element={<Login/>}/>
-                    </Routes>
-                </Container>
+                <Header isLoggedIn={isLoggedIn} logoutHandler={logoutHandler}/>
+                <Routing demo={demo}/>
             </div>
         </BrowserRouter>
     )
