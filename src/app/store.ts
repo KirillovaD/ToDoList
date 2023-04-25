@@ -20,7 +20,8 @@ export const store = configureStore({
 })
 
 
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export type AppRootStateType = ReturnType<RootReducerType>
+export type RootReducerType = typeof rootReducer
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppRootStateType, unknown, AnyAction>
 

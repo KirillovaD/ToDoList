@@ -22,7 +22,7 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
     const isLoggedIn = useSelector(selectIsLoggedIn)
 
     const {fetchTodos,removeTodo:removeTodolistThunk,addTodo:addTodolistThunk, changeTodoTitle:changeTodolistTitleThunk }= useActions(todolistsThunks)
-    const {removeTask:removeTaskThunk, addTask:addTaskThunk, updateTask}= useActions(tasksThunks)
+    const { addTask:addTaskThunk}= useActions(tasksThunks)
     const {changeTodolistFilter}= useActions(todolistsActions)
 
 
@@ -33,21 +33,12 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
         fetchTodos({})
     }, [])
 
-    const removeTask = useCallback(function (taskId: string, todolistId: string) {
-       removeTaskThunk({taskId, todolistId})
-    }, [])
+
 
     const addTask = useCallback(function (title: string, todolistId: string) {
         addTaskThunk({title, todolistId})
     }, [])
 
-    const changeStatus = useCallback(function (taskId: string, status: TaskStatuses, todolistId: string) {
-        updateTask({taskId, domainModel:{status}, todolistId:todolistId})
-    }, [])
-
-    const changeTaskTitle = useCallback(function (taskId: string, title: string, todolistId: string) {
-       updateTask({taskId, domainModel: {title}, todolistId})
-    }, [])
 
     const changeFilter = useCallback(function (value: FilterValuesType, todolistId: string) {
         changeTodolistFilter({id:todolistId, filter:value})
@@ -83,12 +74,9 @@ export const TodolistsList: React.FC<PropsType> = ({demo = false}) => {
                             <Todolist
                                 todolist={tl}
                                 tasks={allTodolistTasks}
-                                removeTask={removeTask}
                                 changeFilter={changeFilter}
                                 addTask={addTask}
-                                changeTaskStatus={changeStatus}
                                 removeTodolist={removeTodolist}
-                                changeTaskTitle={changeTaskTitle}
                                 changeTodolistTitle={changeTodolistTitle}
                                 demo={demo}
                             />
