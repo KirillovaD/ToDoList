@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {CircularProgress} from '@mui/material';
 import {selectIsLoggedIn} from "features/Auth/auth.selectors";
-import {selectInitialized, selectStatus} from "app/app.selector";
+import {selectInitialized} from "app/app.selector";
 import {ErrorSnackbar} from "common/components";
 import {useActions} from "common/hooks";
 import {authThunks} from "features/Auth/auth.reducer";

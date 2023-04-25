@@ -6,7 +6,7 @@ import {ResponseType} from "common/types";
  * Handles application errors that may occur on the server.
  *
  * @template D - The type of data returned by the response.
- * @param {ResponseType<D>} data - The response data from the server.
+ * @param {ResponseType} data - The response data from the server.
  * @param {Dispatch} dispatch - A function for dispatching an action to the Redux Store.
  * @param {boolean} [showError=true] - A flag indicating whether or not to show the error message in the application.
  * @returns {void}
