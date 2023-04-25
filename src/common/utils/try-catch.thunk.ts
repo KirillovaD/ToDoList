@@ -1,7 +1,7 @@
 import {AppDispatch, AppRootStateType} from 'app/store';
-import {handleServerNetworkError} from 'common/utils/handle-server-network-error';
+import {handleServerNetworkError} from 'common/utils/handle-server-network.error';
 import {BaseThunkAPI} from "@reduxjs/toolkit/dist/createAsyncThunk";
-import {appActions} from "app/app-reducer";
+import {appActions} from "app/app.reducer";
 import {ResponseType} from "common/types";
 
 /**
@@ -9,7 +9,7 @@ import {ResponseType} from "common/types";
  * @param thunkAPI
  * @param logic function executed try-catch from our main async thunk
  */
-export const thunkTryCatch = async (thunkAPI: BaseThunkAPI<AppRootStateType, any, AppDispatch, null | ResponseType>, logic: Function) => {
+export const tryCatchThunk = async (thunkAPI: BaseThunkAPI<AppRootStateType, any, AppDispatch, null | ResponseType>, logic: Function) => {
     const {dispatch, rejectWithValue} = thunkAPI
     dispatch(appActions.setAppStatus({status: 'loading'}))
     try {

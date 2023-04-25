@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {todolistsAPI} from "features/TodolistsList/todolists.api";
+import {todolistsAPI} from "features/todolists-list/todolists/todolists.api";
 
 
 

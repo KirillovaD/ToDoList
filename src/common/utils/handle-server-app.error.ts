@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {appActions} from "app/app-reducer";
+import {appActions} from "app/app.reducer";
 import {ResponseType} from "common/types";
 
 /**

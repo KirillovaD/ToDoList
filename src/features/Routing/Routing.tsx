@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Route, Routes} from "react-router-dom";
-import {TodolistsList} from "features/TodolistsList/TodolistsList";
+import {TodolistsList} from "features/todolists-list/TodolistsList";
 import {Login} from "features/Auth/Login";
 import {Container} from "@mui/material";
 

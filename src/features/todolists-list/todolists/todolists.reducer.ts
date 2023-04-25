@@ -1,16 +1,16 @@
-import {RequestStatusType} from 'app/app-reducer'
+import {RequestStatusType} from 'app/app.reducer'
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {clearTasksAndTodolists} from "common/actions";
-import {todolistsAPI, TodolistType, UpdateTodolistTitleArgType} from "features/TodolistsList/todolists.api";
+import {todolistsAPI, TodolistType, UpdateTodolistTitleArgType} from "features/todolists-list/todolists/todolists.api";
 import {createAppAsyncThunk, handleServerAppError} from "common/utils";
 import {ResultCode} from "common/enums";
-import {thunkTryCatch} from "common/utils/thunk-try-catch";
+import {tryCatchThunk} from "common/utils/try-catch.thunk";
 
 
 const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
 ('todo/fetchTodos',
     async (_, thunkAPI) => {
-        return thunkTryCatch(thunkAPI, async () => {
+        return tryCatchThunk(thunkAPI, async () => {
             const res = await todolistsAPI.getTodolists()
             return {todolists: res.data}
         })
@@ -20,7 +20,7 @@ const addTodo = createAppAsyncThunk<{ todolist: TodolistType }, string>
 ('todo/addTodo',
     async (title, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        return thunkTryCatch(thunkAPI, async () => {
+        return tryCatchThunk(thunkAPI, async () => {
             const res = await todolistsAPI.createTodolist(title)
             if (res.data.resultCode === ResultCode.Success) {
                 return {todolist: res.data.data.item}
@@ -36,7 +36,7 @@ const removeTodo = createAppAsyncThunk<{ id: string }, string>
 ('todo/removeTodo',
     async (id, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        return thunkTryCatch(thunkAPI, async () => {
+        return tryCatchThunk(thunkAPI, async () => {
             dispatch(todolistsActions.changeTodolistEntityStatus({id, status: 'loading'}))
             const res = await todolistsAPI.deleteTodolist(id)
             if (res.data.resultCode === ResultCode.Success) {
@@ -53,7 +53,7 @@ const changeTodoTitle = createAppAsyncThunk<UpdateTodolistTitleArgType, UpdateTo
 ('todo/changeTodoTitle',
     async (arg, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        return thunkTryCatch(thunkAPI, async () => {
+        return tryCatchThunk(thunkAPI, async () => {
             const res = await todolistsAPI.updateTodolist(arg)
             if (res.data.resultCode === ResultCode.Success) {
                 return arg

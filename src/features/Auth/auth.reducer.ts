@@ -1,10 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {appActions} from 'app/app-reducer';
+import {appActions} from 'app/app.reducer';
 import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from "common/utils";
 import {clearTasksAndTodolists} from "common/actions";
 import {authAPI, LoginParamsType} from "features/Auth/auth.api";
 import {ResultCode} from "common/enums";
-import {thunkTryCatch} from "common/utils/thunk-try-catch";
+import {tryCatchThunk} from "common/utils/try-catch.thunk";
 
 // import {handleServerAppError} from "common/utils/handle-server-app-error";
 // import {handleServerNetworkError} from "common/utils/handle-server-network-error";
@@ -12,7 +12,7 @@ import {thunkTryCatch} from "common/utils/thunk-try-catch";
 const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
     'Auth/login', async (arg, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        return thunkTryCatch(thunkAPI, async () => {
+        return tryCatchThunk(thunkAPI, async () => {
             const res = await authAPI.login(arg)
             if (res.data.resultCode === ResultCode.Success) {
                 return {isLoggedIn: true}
@@ -27,7 +27,7 @@ const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
 const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, void>
 ('Auth/logout', async (_, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
-    return thunkTryCatch(thunkAPI, async () => {
+    return tryCatchThunk(thunkAPI, async () => {
         const res = await authAPI.logout()
         if (res.data.resultCode === ResultCode.Success) {
             dispatch(clearTasksAndTodolists())

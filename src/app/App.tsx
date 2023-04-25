@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import 'app/App.css'
-import {TodolistsList} from 'features/TodolistsList/TodolistsList'
+import {TodolistsList} from 'features/todolists-list/TodolistsList'
 import {useSelector} from 'react-redux'
 import {BrowserRouter, Route, Routes} from 'react-router-dom'
 import {Login} from 'features/Auth/Login'
@@ -18,12 +18,12 @@ import {
 } from '@mui/material';
 import {Menu} from '@mui/icons-material'
 import {selectIsLoggedIn} from "features/Auth/auth.selectors";
-import {selectInitialized, selectStatus} from "app/app-selector";
+import {selectInitialized, selectStatus} from "app/app.selector";
 import {ErrorSnackbar} from "common/components";
 import {useActions} from "common/hooks";
-import {authThunks} from "features/Auth/auth-reducer";
+import {authThunks} from "features/Auth/auth.reducer";
 import {Header} from "common/components/Header/Header";
-import {Routing} from "common/components/Routing/Routing";
+import {Routing} from "features/Routing/Routing";
 
 type PropsType = {
     demo?: boolean

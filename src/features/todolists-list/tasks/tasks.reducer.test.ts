@@ -1,5 +1,5 @@
-import {tasksReducer, TasksStateType, tasksThunks} from './tasks-reducer'
-import {todolistsThunks} from "features/TodolistsList/todolists-reducer";
+import {tasksReducer, TasksStateType, tasksThunks} from 'features/todolists-list/tasks/tasks.reducer'
+import {todolistsThunks} from "features/todolists-list/todolists/todolists.reducer";
 import {TaskPriorities, TaskStatuses} from "common/enums";
 
 

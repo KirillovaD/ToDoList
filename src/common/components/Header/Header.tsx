@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {AppBar, Button, IconButton, LinearProgress, Toolbar} from "@mui/material";
 import {Menu} from "@mui/icons-material";
+import './header.css'
 
 type Props = {
     isLoggedIn: boolean
