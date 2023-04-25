@@ -100,11 +100,3 @@ export const Login = () => {
         </Grid>
     </Grid>
 }
-
-
-//types
-type FormikErrorType = {
-    email?: string
-    password?: string
-    rememberMe?: boolean
-}

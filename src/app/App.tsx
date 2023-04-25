@@ -1,22 +1,8 @@
 import React, {useEffect} from 'react'
 import 'app/App.css'
-import {TodolistsList} from 'features/todolists-list/TodolistsList'
 import {useSelector} from 'react-redux'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import {Login} from 'features/Auth/Login'
-
-
-import {
-    AppBar,
-    Button,
-    CircularProgress,
-    Container,
-    IconButton,
-    LinearProgress,
-    Toolbar,
-    Typography
-} from '@mui/material';
-import {Menu} from '@mui/icons-material'
+import {BrowserRouter} from 'react-router-dom'
+import {CircularProgress} from '@mui/material';
 import {selectIsLoggedIn} from "features/Auth/auth.selectors";
 import {selectInitialized, selectStatus} from "app/app.selector";
 import {ErrorSnackbar} from "common/components";
