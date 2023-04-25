@@ -1,6 +1,10 @@
 import React, {FC, useCallback} from "react";
 import {Button} from "@mui/material";
-import {TodolistDomainType, todolistsActions} from "features/todolists-list/todolists/todolists.reducer";
+import {
+    FilterValuesType,
+    TodolistDomainType,
+    todolistsActions
+} from "features/todolists-list/todolists/todolists.reducer";
 import {useActions} from "common/hooks";
 
 type Props = {
@@ -10,24 +14,23 @@ type Props = {
 export const FilterTasksButtons:FC<Props>=({todolist})=> {
     const {changeTodolistFilter} = useActions(todolistsActions)
 
-    const onAllClickHandler = useCallback(() => changeTodolistFilter({filter: 'all', id:todolist.id}), [todolist.id, changeTodolistFilter])
-    const onActiveClickHandler = useCallback(() => changeTodolistFilter({filter:'active',id:todolist.id}), [todolist.id, changeTodolistFilter])
-    const onCompletedClickHandler = useCallback(() => changeTodolistFilter({filter:'completed',id: todolist.id}), [todolist.id, changeTodolistFilter])
-
+    const changeFilterHandler = (filter:FilterValuesType)=>{
+        changeTodolistFilter({filter, id: todolist.id})
+    }
 
     return (
         <>
             <Button variant={todolist.filter === 'all' ? 'outlined' : 'text'}
-                    onClick={onAllClickHandler}
+                    onClick={()=>changeFilterHandler('all')}
                     color={'inherit'}
             >All
             </Button>
             <Button variant={todolist.filter === 'active' ? 'outlined' : 'text'}
-                    onClick={onActiveClickHandler}
+                    onClick={()=>changeFilterHandler('active')}
                     color={'primary'}>Active
             </Button>
             <Button variant={todolist.filter === 'completed' ? 'outlined' : 'text'}
-                    onClick={onCompletedClickHandler}
+                    onClick={()=>changeFilterHandler('completed')}
                     color={'secondary'}>Completed
             </Button>
         </>

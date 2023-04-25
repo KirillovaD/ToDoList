@@ -1,18 +1,14 @@
-import React, {FC, memo, useCallback, useEffect} from 'react'
-import {Task} from 'features/todolists-list/todolists/Todolist/Task/Task'
-import {
-    TodolistDomainType,
-    todolistsActions,
-    todolistsThunks
-} from 'features/todolists-list/todolists/todolists.reducer'
-import {Button, IconButton} from '@mui/material'
+import React, {FC, memo, useEffect} from 'react'
+import {TodolistDomainType, todolistsThunks} from 'features/todolists-list/todolists/todolists.reducer'
+import {IconButton} from '@mui/material'
 import {Delete} from '@mui/icons-material'
 import {tasksThunks} from "features/todolists-list/tasks/tasks.reducer";
 import {AddItemForm, EditableSpan} from "common/components";
 import {useActions} from "common/hooks";
-import {TaskStatuses} from "common/enums";
 import {TaskType} from "features/todolists-list/tasks/tasks.api";
 import {FilterTasksButtons} from "features/todolists-list/todolists/Todolist/FilterTasksButtons/FilterTasksButtons";
+import s from './todolist.module.css'
+import {Tasks} from "features/todolists-list/todolists/Tasks/Tasks";
 
 type Props = {
     todolist: TodolistDomainType
@@ -45,28 +41,15 @@ export const Todolist: FC<Props> = memo(({todolist, tasks, demo}) => {
     }
 
 
-    let tasksForTodolist = tasks
-
-    if (todolist.filter === 'active') {
-        tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.New)
-    }
-    if (todolist.filter === 'completed') {
-        tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.Completed)
-    }
-
-    return <div>
+    return <div className={s.todolist_container}>
         <h3><EditableSpan value={todolist.title} onChange={changeTodolistTitleHandler}/>
             <IconButton onClick={removeTodolistHandler} disabled={todolist.entityStatus === 'loading'}>
                 <Delete/>
             </IconButton>
         </h3>
         <AddItemForm addItem={addTaskCallback} disabled={todolist.entityStatus === 'loading'}/>
-        <div>
-            {
-                tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={todolist.id}/>)
-            }
-        </div>
-        <div style={{paddingTop: '10px'}}>
+        <Tasks tasks={tasks} todolist={todolist}/>
+        <div className={s.filterTasksButtons_container}>
             <FilterTasksButtons todolist={todolist}/>
         </div>
     </div>

@@ -1,0 +1,23 @@
+.todolist_container{
+    width: 300px;
+    padding: 10px 15px 20px 15px;
+
+
+}
+.todolist_container h3 {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    align-items: center;
+
+}
+.todolist_container h3 span{
+    max-width: 250px;
+    overflow-x: hidden;
+
+}
+.filterTasksButtons_container{
+    padding-top: 10px;
+
+}

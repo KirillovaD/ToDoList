@@ -46,7 +46,7 @@ export const TodolistsList:FC<Props> = ({demo = false}) => {
                     let allTodolistTasks = tasks[tl.id]
 
                     return <Grid item key={tl.id}>
-                        <Paper style={{padding: '10px'}}>
+                        <Paper>
                             <Todolist
                                 todolist={tl}
                                 tasks={allTodolistTasks}
