@@ -7,8 +7,8 @@ import {ResultCode} from "common/enums";
 import {tryCatchThunk} from "common/utils/try-catch.thunk";
 
 
-const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
-('todo/fetchTodos',
+const fetchTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
+('todo/fetchTodolists',
     async (_, thunkAPI) => {
         return tryCatchThunk(thunkAPI, async () => {
             const res = await todolistsAPI.getTodolists()
@@ -16,8 +16,8 @@ const fetchTodos = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
         })
     })
 
-const addTodo = createAppAsyncThunk<{ todolist: TodolistType }, string>
-('todo/addTodo',
+const addTodolist = createAppAsyncThunk<{ todolist: TodolistType }, string>
+('todo/addTodolist',
     async (title, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
         return tryCatchThunk(thunkAPI, async () => {
@@ -32,8 +32,8 @@ const addTodo = createAppAsyncThunk<{ todolist: TodolistType }, string>
     })
 
 
-const removeTodo = createAppAsyncThunk<{ id: string }, string>
-('todo/removeTodo',
+const removeTodolist = createAppAsyncThunk<{ id: string }, string>
+('todo/removeTodolist',
     async (id, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
         return tryCatchThunk(thunkAPI, async () => {
@@ -49,8 +49,8 @@ const removeTodo = createAppAsyncThunk<{ id: string }, string>
         })
     })
 
-const changeTodoTitle = createAppAsyncThunk<UpdateTodolistTitleArgType, UpdateTodolistTitleArgType>
-('todo/changeTodoTitle',
+const changeTodolistTitle = createAppAsyncThunk<UpdateTodolistTitleArgType, UpdateTodolistTitleArgType>
+('todo/changeTodolistTitle',
     async (arg, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
         return tryCatchThunk(thunkAPI, async () => {
@@ -82,17 +82,17 @@ const slice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchTodos.fulfilled, (state, action) => {
+            .addCase(fetchTodolists.fulfilled, (state, action) => {
                 return action.payload.todolists.map(tl => ({...tl, filter: 'all', entityStatus: 'idle'}))
             })
-            .addCase(addTodo.fulfilled, (state, action) => {
+            .addCase(addTodolist.fulfilled, (state, action) => {
                 state.unshift({...action.payload.todolist, filter: 'all', entityStatus: 'idle'})
             })
-            .addCase(removeTodo.fulfilled, (state, action) => {
+            .addCase(removeTodolist.fulfilled, (state, action) => {
                 const index = state.findIndex(todo => todo.id === action.payload.id)
                 if (index !== -1) state.splice(index, 1)
             })
-            .addCase(changeTodoTitle.fulfilled, (state, action) => {
+            .addCase(changeTodolistTitle.fulfilled, (state, action) => {
                 const todo = state.find(tl => tl.id === action.payload.id)
                 if (todo) todo.title = action.payload.title
             })
@@ -107,7 +107,7 @@ const slice = createSlice({
 })
 export const todolistsReducer = slice.reducer
 export const todolistsActions = slice.actions
-export const todolistsThunks = {fetchTodos, removeTodo, addTodo, changeTodoTitle}
+export const todolistsThunks = {fetchTodolists, removeTodolist, addTodolist, changeTodolistTitle}
 
 // types
 export type FilterValuesType = 'all' | 'active' | 'completed';

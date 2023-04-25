@@ -99,7 +99,7 @@ test('title of specified task should be changed', () => {
     expect(endState["todolistId2"][0].title).toBe("bread");
 });
 test('new array should be added when new todolist is added', () => {
-    const action = todolistsThunks.addTodo.fulfilled({
+    const action = todolistsThunks.addTodolist.fulfilled({
         todolist: {
             id: "blabla",
             title: "new todolist",
@@ -121,7 +121,7 @@ test('new array should be added when new todolist is added', () => {
     expect(endState[newKey]).toEqual([]);
 });
 test('propertry with todolistId should be deleted', () => {
-    const action = todolistsThunks.removeTodo.fulfilled({id: "todolistId2"}, 'requestId', "todolistId2");
+    const action = todolistsThunks.removeTodolist.fulfilled({id: "todolistId2"}, 'requestId', "todolistId2");
 
     const endState = tasksReducer(startState, action)
 
@@ -132,7 +132,7 @@ test('propertry with todolistId should be deleted', () => {
 });
 
 test('empty arrays should be added when we set todolists', () => {
-    const action = todolistsThunks.fetchTodos.fulfilled({
+    const action = todolistsThunks.fetchTodolists.fulfilled({
         todolists: [
             {id: "1", title: "title 1", order: 0, addedDate: ""},
             {id: "2", title: "title 2", order: 0, addedDate: ""}

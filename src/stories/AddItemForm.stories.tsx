@@ -61,7 +61,7 @@ const Template1: ComponentStory<typeof AddItemForm> = (args) => {
                    error={!!error}
                    value={title}
                    onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
+                   onKeyDown={onKeyPressHandler}
                    label="Title"
                    helperText={error}
         />
