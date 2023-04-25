@@ -16,7 +16,6 @@ type PropsType = {
 }
 
 function App({demo = false}: PropsType) {
-    const status = useSelector(selectStatus)
     const isInitialized = useSelector(selectInitialized)
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const {initializeApp, logout} = useActions(authThunks)
