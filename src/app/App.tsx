@@ -3,13 +3,13 @@ import 'app/App.css'
 import {useSelector} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
 import {CircularProgress} from '@mui/material';
-import {selectIsLoggedIn} from "features/Auth/auth.selectors";
+import {selectIsLoggedIn} from "features/auth/auth.selectors";
 import {selectInitialized} from "app/app.selector";
 import {ErrorSnackbar} from "common/components";
 import {useActions} from "common/hooks";
-import {authThunks} from "features/Auth/auth.reducer";
+import {authThunks} from "features/auth/auth.reducer";
 import {Header} from "common/components/Header/Header";
-import {Routing} from "features/Routing/Routing";
+import {Routing} from "features/routing/Routing";
 
 type PropsType = {
     demo?: boolean

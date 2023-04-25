@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Task} from "features/todolists-list/todolists/Todolist/Task/Task";
+import {Task} from "features/todolists-list/todolists/Todolist/Tasks/Task/Task";
 import {TaskStatuses} from "common/enums";
 import {TodolistDomainType} from "features/todolists-list/todolists/todolists.reducer";
 import {TaskType} from "features/todolists-list/tasks/tasks.api";
@@ -19,11 +19,11 @@ export const Tasks:FC<Props>=({todolist,tasks})=>{
         tasksForTodolist = tasks.filter(t => t.status === TaskStatuses.Completed)
     }
     return (
-        <div>
+        <>
             {
                 tasksForTodolist.map(t => <Task key={t.id} task={t} todolistId={todolist.id}/>)
             }
-        </div>
+        </>
     );
 }
 

@@ -2,7 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {appActions} from 'app/app.reducer';
 import {createAppAsyncThunk, handleServerAppError, handleServerNetworkError} from "common/utils";
 import {clearTasksAndTodolists} from "common/actions";
-import {authAPI, LoginParamsType} from "features/Auth/auth.api";
+import {authAPI, LoginParamsType} from "features/auth/auth.api";
 import {ResultCode} from "common/enums";
 import {tryCatchThunk} from "common/utils/try-catch.thunk";
 
@@ -10,7 +10,7 @@ import {tryCatchThunk} from "common/utils/try-catch.thunk";
 // import {handleServerNetworkError} from "common/utils/handle-server-network-error";
 
 const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
-    'Auth/login', async (arg, thunkAPI) => {
+    'auth/login', async (arg, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
         return tryCatchThunk(thunkAPI, async () => {
             const res = await authAPI.login(arg)
@@ -25,7 +25,7 @@ const login = createAppAsyncThunk<{ isLoggedIn: boolean }, LoginParamsType>(
     }
 )
 const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, void>
-('Auth/logout', async (_, thunkAPI) => {
+('auth/logout', async (_, thunkAPI) => {
     const {dispatch, rejectWithValue} = thunkAPI
     return tryCatchThunk(thunkAPI, async () => {
         const res = await authAPI.logout()

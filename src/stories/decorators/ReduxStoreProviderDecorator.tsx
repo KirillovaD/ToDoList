@@ -9,7 +9,7 @@ import {AppRootStateType, RootReducerType} from "app/store";
 import {tasksReducer} from "features/todolists-list/tasks/tasks.reducer";
 import {todolistsReducer} from "features/todolists-list/todolists/todolists.reducer";
 import {appReducer} from "app/app.reducer";
-import {authReducer} from "features/Auth/auth.reducer";
+import {authReducer} from "features/auth/auth.reducer";
 import {TaskPriorities, TaskStatuses} from "common/enums";
 
 

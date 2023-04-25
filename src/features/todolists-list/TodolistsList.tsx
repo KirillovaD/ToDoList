@@ -4,7 +4,7 @@ import {todolistsThunks} from 'features/todolists-list/todolists/todolists.reduc
 import {Grid, Paper} from '@mui/material'
 import {Todolist} from 'features/todolists-list/todolists/Todolist/Todolist'
 import {Navigate} from 'react-router-dom'
-import {selectIsLoggedIn} from "features/Auth/auth.selectors";
+import {selectIsLoggedIn} from "features/auth/auth.selectors";
 import {selectTodolists} from "features/todolists-list/todolists/todolists.selector";
 import {selectTasks} from "features/todolists-list/tasks/task.selector";
 import {AddItemForm} from "common/components";

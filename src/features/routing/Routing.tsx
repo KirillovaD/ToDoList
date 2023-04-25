@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Route, Routes} from "react-router-dom";
 import {TodolistsList} from "features/todolists-list/TodolistsList";
-import {Login} from "features/Auth/Login";
+import {Login} from "features/auth/Login";
 import {Container} from "@mui/material";
 
 type Props={
