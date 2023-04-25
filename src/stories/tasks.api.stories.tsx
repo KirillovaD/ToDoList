@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import {tasksAPI} from "features/todolists-list/tasks/tasks.api";
-import {todolistsAPI} from "features/todolists-list/todolists/todolists.api";
 
 
 export default {
