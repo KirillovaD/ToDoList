@@ -1,4 +1,4 @@
-import React, {FC, useCallback, useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import {useSelector} from 'react-redux'
 import {todolistsThunks} from 'features/todolists-list/todolists/todolists.reducer'
 import {Grid, Paper} from '@mui/material'
