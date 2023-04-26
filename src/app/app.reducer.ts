@@ -1,5 +1,4 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {action} from "@storybook/addon-actions";
 
 const initialState = {
     status: 'idle' as RequestStatusType,
@@ -29,7 +28,7 @@ const slice = createSlice({
         builder
             .addMatcher((action) => {
                 return action.type.endsWith('/pending')
-            }, (state, action) => {
+            }, (state) => {
                 state.status = 'loading'
             })
             .addMatcher((action) => {
@@ -44,7 +43,7 @@ const slice = createSlice({
             })
             .addMatcher((action) => {
                 return action.type.endsWith('/fulfilled')
-            }, (state, action) => {
+            }, (state) => {
                 state.status = 'succeeded'
             })
     }
