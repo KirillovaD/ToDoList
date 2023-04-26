@@ -4,10 +4,10 @@ import {TodolistsList} from "features/todolists-list/TodolistsList";
 import {Login} from "features/auth/Login";
 import {Container} from "@mui/material";
 
-type Props={
+type Props = {
     demo?: boolean
 }
-export const Routing:FC<Props>=({demo}) =>{
+export const Routing: FC<Props> = ({demo}) => {
     return (
         <Container fixed>
             <Routes>

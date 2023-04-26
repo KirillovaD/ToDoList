@@ -1,21 +1,27 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from 'react';
+import React, {ChangeEvent, FC, KeyboardEvent, memo, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import { AddBox } from '@mui/icons-material';
+import {ResponseType} from "common/types";
 
-type AddItemFormPropsType = {
-    addItem: (title: string) => void
+type Props = {
+    addItem: (title: string) => Promise<any>
     disabled?:boolean
 }
 
-export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
+export const AddItemForm:FC<Props> = memo(({addItem, disabled})=> {
     let [title, setTitle] = useState('')
     let [error, setError] = useState<string | null>(null)
 
-    const addItem = () => {
+    const addItemHandler = () => {
         if (title.trim() !== '') {
-            props.addItem(title);
-            setTitle('');
+            addItem(title).then(()=>{
+                setTitle('');
+            })
+                .catch((err: ResponseType)=>{
+                    setError(err.messages[0])
+                });
+
         } else {
             setError('Title is required');
         }
@@ -30,7 +36,7 @@ export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
             setError(null);
         }
         if (e.key === 'Enter') {
-            addItem();
+            addItemHandler();
         }
     }
 
@@ -42,9 +48,9 @@ export const AddItemForm = React.memo(function (props: AddItemFormPropsType) {
                    onKeyDown={onKeyPressHandler}
                    label="Title"
                    helperText={error}
-                   disabled={props.disabled}
+                   disabled={disabled}
         />
-        <IconButton color="primary" onClick={addItem} disabled={props.disabled}>
+        <IconButton color="primary" onClick={addItemHandler} disabled={disabled}>
             <AddBox/>
         </IconButton>
     </div>

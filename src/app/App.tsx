@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {FC, useEffect} from 'react'
 import 'app/App.css'
 import {useSelector} from 'react-redux'
 import {BrowserRouter} from 'react-router-dom'
@@ -11,11 +11,11 @@ import {authThunks} from "features/auth/auth.reducer";
 import {Header} from "common/components/Header/Header";
 import {Routing} from "features/routing/Routing";
 
-type PropsType = {
+type Props = {
     demo?: boolean
 }
 
-function App({demo = false}: PropsType) {
+export const App:FC<Props>=({demo = false})=>{
     const isInitialized = useSelector(selectInitialized)
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const {initializeApp, logout} = useActions(authThunks)

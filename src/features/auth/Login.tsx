@@ -12,7 +12,6 @@ import {selectIsLoggedIn} from "features/auth/auth.selectors";
 import '../../index.css';
 
 
-
 export const Login = () => {
     const {login} = useActions(authThunks)
 

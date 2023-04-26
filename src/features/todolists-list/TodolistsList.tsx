@@ -14,12 +14,12 @@ type Props = {
     demo?: boolean
 }
 
-export const TodolistsList:FC<Props> = ({demo = false}) => {
+export const TodolistsList: FC<Props> = ({demo = false}) => {
     const todolists = useSelector(selectTodolists)
     const tasks = useSelector(selectTasks)
     const isLoggedIn = useSelector(selectIsLoggedIn)
 
-    const {fetchTodolists,addTodolist}= useActions(todolistsThunks)
+    const {fetchTodolists, addTodolist} = useActions(todolistsThunks)
 
     useEffect(() => {
         if (demo || !isLoggedIn) {
@@ -28,12 +28,12 @@ export const TodolistsList:FC<Props> = ({demo = false}) => {
         fetchTodolists({})
     }, [])
 
-    const addTodolistCallback = useCallback((title: string) => {
-        addTodolist(title)
-    }, [])
+    const addTodolistCallback = (title: string) => {
+        return addTodolist(title).unwrap()
+    }
 
     if (!isLoggedIn) {
-        return <Navigate to={"/login"} />
+        return <Navigate to={"/login"}/>
     }
 
     return <>

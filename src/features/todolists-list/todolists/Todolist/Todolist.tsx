@@ -1,9 +1,7 @@
 import React, {FC, memo, useEffect} from 'react'
-import {TodolistDomainType, todolistsThunks} from 'features/todolists-list/todolists/todolists.reducer'
-import {IconButton} from '@mui/material'
-import {Delete} from '@mui/icons-material'
+import {TodolistDomainType} from 'features/todolists-list/todolists/todolists.reducer'
 import {tasksThunks} from "features/todolists-list/tasks/tasks.reducer";
-import {AddItemForm, EditableSpan} from "common/components";
+import {AddItemForm} from "common/components";
 import {useActions} from "common/hooks";
 import {TaskType} from "features/todolists-list/tasks/tasks.api";
 import {FilterTasksButtons} from "features/todolists-list/todolists/Todolist/FilterTasksButtons/FilterTasksButtons";
@@ -28,7 +26,7 @@ export const Todolist: FC<Props> = memo(({todolist, tasks, demo}) => {
     }, [])
 
     const addTaskCallback = (title: string) => {
-        addTask({title, todolistId: todolist.id})
+        return addTask({title, todolistId: todolist.id}).unwrap()
     }
 
     return <div className={s.todolist_container}>
