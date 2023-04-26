@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {action} from "@storybook/addon-actions";
 
 const initialState = {
     status: 'idle' as RequestStatusType,
@@ -24,6 +25,29 @@ const slice = createSlice({
             state.isInitialized = action.payload.isInitialized
         },
     },
+    extraReducers: builder => {
+        builder
+            .addMatcher((action) => {
+                return action.type.endsWith('/pending')
+            }, (state, action) => {
+                state.status = 'loading'
+            })
+            .addMatcher((action) => {
+                return action.type.endsWith('/rejected')
+            }, (state, action) => {
+                if (action.payload) {
+                    state.error = action.payload.messages.length ? action.payload.messages[0] : 'Some error occurred'
+                } else {
+                    state.error = action.error.message ? action.error.message : 'Some error occurred'
+                }
+                state.status = 'failed'
+            })
+            .addMatcher((action) => {
+                return action.type.endsWith('/fulfilled')
+            }, (state, action) => {
+                state.status = 'succeeded'
+            })
+    }
 })
 
 export const appReducer = slice.reducer
