@@ -8,11 +8,9 @@ import TextField from "@mui/material/TextField/TextField";
 import {IconButton} from "@mui/material";
 import {AddBox} from "@mui/icons-material";
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
     title: 'TODOLISTS/AddItemForm',
     component: AddItemForm,
-    // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
     argTypes: {
        addItem:{
            description:'Button clicked inside form'
@@ -22,12 +20,10 @@ export default {
     },
 } as ComponentMeta<typeof AddItemForm>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+
 const Template: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm {...args} />;
 
 export const AddItemFormStory = Template.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-
 AddItemFormStory.args= {
     addItem:action('Button clicked inside form')
 }
@@ -65,7 +61,7 @@ const Template1: ComponentStory<typeof AddItemForm> = (args) => {
                    error={!!error}
                    value={title}
                    onChange={onChangeHandler}
-                   onKeyPress={onKeyPressHandler}
+                   onKeyDown={onKeyPressHandler}
                    label="Title"
                    helperText={error}
         />
@@ -83,7 +79,6 @@ AddItemFormErrorStory .args={
 const Template3: ComponentStory<typeof AddItemForm> = (args) => <AddItemForm disabled={true} {...args} />;
 
 export const AddItemFormDisabledStory = Template3.bind({});
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 AddItemFormStory.args= {
     addItem:action('Button clicked inside form')

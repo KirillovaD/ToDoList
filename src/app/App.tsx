@@ -1,42 +1,30 @@
-import React, {useEffect} from 'react'
-import './App.css'
-import {TodolistsList} from 'features/TodolistsList/TodolistsList'
+import React, {FC, useEffect} from 'react'
+import 'app/App.css'
 import {useSelector} from 'react-redux'
-import {BrowserRouter, Route, Routes} from 'react-router-dom'
-import {Login} from 'features/Auth/Login'
-
-import {
-    AppBar,
-    Button,
-    CircularProgress,
-    Container,
-    IconButton,
-    LinearProgress,
-    Toolbar,
-    Typography
-} from '@mui/material';
-import {Menu} from '@mui/icons-material'
-import {selectIsLoggedIn} from "features/Auth/auth.selectors";
-import {selectInitialized, selectStatus} from "app/app-selector";
+import {BrowserRouter} from 'react-router-dom'
+import {CircularProgress} from '@mui/material';
+import {selectIsLoggedIn} from "features/auth/auth.selectors";
+import {selectInitialized} from "app/app.selector";
 import {ErrorSnackbar} from "common/components";
 import {useActions} from "common/hooks";
-import {authThunks} from "features/Auth/auth-reducer";
+import {authThunks} from "features/auth/auth.reducer";
+import {Header} from "common/components/Header/Header";
+import {Routing} from "features/routing/Routing";
 
-type PropsType = {
+type Props = {
     demo?: boolean
 }
 
-function App({demo = false}: PropsType) {
-    const status = useSelector(selectStatus)
+export const App:FC<Props>=({demo = false})=>{
     const isInitialized = useSelector(selectInitialized)
     const isLoggedIn = useSelector(selectIsLoggedIn)
     const {initializeApp, logout} = useActions(authThunks)
 
     useEffect(() => {
-        initializeApp()
+        initializeApp({})
     }, [])
 
-    const logoutHandler = () => logout()
+    const logoutHandler = () => logout({})
 
 
     if (!isInitialized) {
@@ -50,24 +38,8 @@ function App({demo = false}: PropsType) {
         <BrowserRouter>
             <div className="App">
                 <ErrorSnackbar/>
-                <AppBar position="static">
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" aria-label="menu">
-                            <Menu/>
-                        </IconButton>
-                        <Typography variant="h6">
-                            News
-                        </Typography>
-                        {isLoggedIn && <Button color="inherit" onClick={logoutHandler}>Log out</Button>}
-                    </Toolbar>
-                    {status === 'loading' && <LinearProgress/>}
-                </AppBar>
-                <Container fixed>
-                    <Routes>
-                        <Route path={'/'} element={<TodolistsList demo={demo}/>}/>
-                        <Route path={'/login'} element={<Login/>}/>
-                    </Routes>
-                </Container>
+                <Header isLoggedIn={isLoggedIn} logoutHandler={logoutHandler}/>
+                <Routing demo={demo}/>
             </div>
         </BrowserRouter>
     )
