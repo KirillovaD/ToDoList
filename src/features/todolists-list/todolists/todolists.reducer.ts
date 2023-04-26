@@ -7,28 +7,24 @@ import {ResultCode} from "common/enums";
 import {tryCatchThunk} from "common/utils/try-catch.thunk";
 
 
+
 const fetchTodolists = createAppAsyncThunk<{ todolists: TodolistType[] }, void>
 ('todo/fetchTodolists',
-    async (_, thunkAPI) => {
-        return tryCatchThunk(thunkAPI, async () => {
-            const res = await todolistsAPI.getTodolists()
-            return {todolists: res.data}
-        })
+    async () => {
+        const res = await todolistsAPI.getTodolists()
+        return {todolists: res.data}
     })
 
 const addTodolist = createAppAsyncThunk<{ todolist: TodolistType }, string>
 ('todo/addTodolist',
     async (title, thunkAPI) => {
-        const {dispatch, rejectWithValue} = thunkAPI
-        return tryCatchThunk(thunkAPI, async () => {
+        const {rejectWithValue} = thunkAPI
             const res = await todolistsAPI.createTodolist(title)
             if (res.data.resultCode === ResultCode.Success) {
                 return {todolist: res.data.data.item}
             } else {
-                handleServerAppError(res.data, dispatch,false);
                 return rejectWithValue(res.data)
             }
-        })
     })
 
 

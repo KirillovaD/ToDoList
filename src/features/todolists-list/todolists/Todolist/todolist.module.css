@@ -8,13 +8,13 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: nowrap;
-
     align-items: center;
 
 }
-.todolist_container h3 span{
+.todolist_container span{
     max-width: 250px;
     overflow-x: hidden;
+    text-overflow: ellipsis;
 
 }
 .filterTasksButtons_container{

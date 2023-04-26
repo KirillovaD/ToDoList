@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e028dba4-0ab7-4244-b1d2-921d43e55146" name="Changes" comment="20.8 fix all pesent components">
-      <change beforePath="$PROJECT_DIR$/src/app/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/AddItemForm/AddItemForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/EditableSpan/EditableSpan.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/EditableSpan/EditableSpan.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/common/components/ErrorSnackbar/ErrorSnackbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/common/components/ErrorSnackbar/ErrorSnackbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/auth/Login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/auth/Login.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/routing/Routing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/routing/Routing.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolists-list/TodolistsList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolists-list/TodolistsList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolists-list/tasks/tasks.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolists-list/tasks/tasks.reducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolists-list/todolists/Todolist/FilterTasksButtons/FilterTasksButtons.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolists-list/todolists/Todolist/FilterTasksButtons/FilterTasksButtons.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolists-list/todolists/Todolist/Todolist.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolists-list/todolists/Todolist/Todolist.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/features/todolists-list/todolists/todolists.reducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/features/todolists-list/todolists/todolists.reducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +230,7 @@
       <workItem from="1682090444718" duration="641000" />
       <workItem from="1682337418770" duration="5437000" />
       <workItem from="1682414866223" duration="22934000" />
-      <workItem from="1682492046779" duration="9709000" />
+      <workItem from="1682492046779" duration="10728000" />
     </task>
     <task id="LOCAL-00001" summary="inital commit">
       <created>1673942406647</created>
@@ -473,18 +463,62 @@
       <option name="project" value="LOCAL" />
       <updated>1682429884572</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="20.8 fix all pesent components">
+      <created>1682502725265</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1682502725265</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="origin/main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
