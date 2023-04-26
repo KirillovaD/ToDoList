@@ -23,7 +23,7 @@ const addTodolist = createAppAsyncThunk<{ todolist: TodolistType }, string>
             if (res.data.resultCode === ResultCode.Success) {
                 return {todolist: res.data.data.item}
             } else {
-                return rejectWithValue(res.data)
+                return rejectWithValue({data: res.data, showGlobalError: false})
             }
     })
 
@@ -32,17 +32,13 @@ const removeTodolist = createAppAsyncThunk<{ id: string }, string>
 ('todo/removeTodolist',
     async (id, thunkAPI) => {
         const {dispatch, rejectWithValue} = thunkAPI
-        return tryCatchThunk(thunkAPI, async () => {
-            dispatch(todolistsActions.changeTodolistEntityStatus({id, status: 'loading'}))
-            const res = await todolistsAPI.deleteTodolist(id)
-            if (res.data.resultCode === ResultCode.Success) {
-                return {id}
-            } else {
-                handleServerAppError(res.data, dispatch);
-                return rejectWithValue(null)
-            }
-
-        })
+        dispatch(todolistsActions.changeTodolistEntityStatus({id, status: 'loading'}))
+        const res = await todolistsAPI.deleteTodolist(id)
+        if (res.data.resultCode === ResultCode.Success) {
+            return {id}
+        } else {
+            return rejectWithValue(null)
+        }
     })
 
 const changeTodolistTitle = createAppAsyncThunk<UpdateTodolistTitleArgType, UpdateTodolistTitleArgType>

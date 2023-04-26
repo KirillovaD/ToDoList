@@ -26,26 +26,32 @@ const slice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addMatcher((action) => {
-                return action.type.endsWith('/pending')
-            }, (state) => {
-                state.status = 'loading'
-            })
-            .addMatcher((action) => {
-                return action.type.endsWith('/rejected')
-            }, (state, action) => {
-                if (action.payload) {
-                    state.error = action.payload.messages.length ? action.payload.messages[0] : 'Some error occurred'
-                } else {
-                    state.error = action.error.message ? action.error.message : 'Some error occurred'
+            .addMatcher(
+                action => action.type.endsWith('/pending'),
+                state => {
+                    state.status = 'loading'
                 }
-                state.status = 'failed'
-            })
-            .addMatcher((action) => {
-                return action.type.endsWith('/fulfilled')
-            }, (state) => {
-                state.status = 'succeeded'
-            })
+            )
+            .addMatcher(
+                action => action.type.endsWith('/rejected'),
+                (state, action) => {
+                    const { payload, error } = action
+                    if (payload) {
+                        if (payload.showGlobalError) {
+                            state.error = payload.data.messages.length ? payload.data.messages[0] : 'Some error occurred'
+                        }
+                    } else {
+                        state.error = error.message ? error.message : 'Some error occurred'
+                    }
+                    state.status = 'failed'
+                }
+            )
+            .addMatcher(
+                action => action.type.endsWith('/fulfilled'),
+                state => {
+                    state.status = 'succeeded'
+                }
+            )
     }
 })
 
