@@ -6,10 +6,15 @@ Classic task manager
 
 ## Technology stack
 typescript 
-react 
+
+react
+
 redux, redux toolkit 
+
 rest API 
+
 formik 
+
 MUI 
 
 
