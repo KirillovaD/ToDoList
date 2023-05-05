@@ -2,7 +2,7 @@
 
 Classic task manager
 
-## [DEMO](https://github.com/facebook/create-react-app)
+## [DEMO](https://kirillovad.github.io/toDoList)
 
 ## Technology stack
 typescript 
