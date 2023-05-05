@@ -2,7 +2,7 @@
 
 Classic task manager
 
-## DEMO
+## [DEMO](https://github.com/facebook/create-react-app)
 
 ## Technology stack
 typescript 
@@ -16,5 +16,7 @@ rest API
 formik 
 
 MUI 
+
+Storybook
 
 
